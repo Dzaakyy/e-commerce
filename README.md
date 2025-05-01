@@ -21,29 +21,21 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
 ## Instalasi
 1. **Kloning repositori**:
    ```bash
-   git clone <url-repositori>
-   cd <folder-repositori>
+   git clone https://github.com/Dzaakyy/e-commerce
+   cd e-commerce
    ```
 
 2. **Instal dependensi**:
    ```bash
    npm install
    ```
-
-3. **Siapkan database MySQL**:
-   - Buat database bernama `ecommerce_db`.
-   - Jalankan skrip SQL (`database.sql`) untuk membuat tabel produk dan pengguna:
-     ```bash
-     mysql -u <your_mysql_user> -p ecommerce_db < database.sql
-     ```
-
-4. **Jalankan server Redis**:
+3. **Jalankan server Redis**:
    Pastikan Redis berjalan di sistem Anda:
    ```bash
    redis-server
    ```
 
-5. **Jalankan aplikasi**:
+4. **Jalankan aplikasi**:
    ```bash
    npm run dev
    ```
