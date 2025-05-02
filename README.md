@@ -16,7 +16,7 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
 - **Dependensi Lain**:
   - `mysql2`: Driver MySQL untuk Node.js.
   - `redis`: Klien Redis untuk Node.js.
-  - Pustaka Node.js standar lainnya (misalnya, `express`, `dotenv`, `cors`, `body-parser`).
+  - Pustaka Node.js standar lainnya (`express`, `dotenv`, `cors`, `body-parser`).
 
 ## Instalasi
 1. **Kloning repositori**:

@@ -1,15 +1,4 @@
-const mysql = require('mysql2/promise');
-require('dotenv').config();
-
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-});
+const pool = require('../config/dbConfig');
 
 const productController = {
     getAllProducts: async (req, res) => {
@@ -28,7 +17,6 @@ const productController = {
             if (rows.length === 0 ) {
                 return res.status(404).json({ message : 'Product Not Found'})
             }
-
             res.status(200).json(rows[0])
         } catch (error) {
             res.status(500).json({ message: 'Error fetching product', error });

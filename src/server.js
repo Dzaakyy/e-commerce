@@ -25,5 +25,4 @@ app.use((err, res, req, next) => {
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-    console.log(`Redis connected`);
 })
