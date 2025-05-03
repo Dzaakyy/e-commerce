@@ -1,4 +1,4 @@
-const redisClient = require('../config/redisConfig');
+import redisClient from '../config/redisConfig.js'; 
 
 const cartController = {
     addToCart: async (req, res) => {
@@ -46,4 +46,4 @@ const cartController = {
     }
 };
 
-module.exports = cartController;
+export default cartController;
