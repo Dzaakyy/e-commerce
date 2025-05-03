@@ -30,7 +30,7 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
    npm install
    ```
 3. **Jalankan server Redis**:
-   Pastikan Redis berjalan di sistem Anda:
+   Pastikan Redis berjalan di sistem:
    ```bash
    redis-server
    ```
