@@ -14,10 +14,10 @@ import { validateUser, validateProduct, validateCategory, validateCart, validate
 router.post('/login',validateLogin, userController.loginUser);
 router.post('/register', validateUser, userController.registerUser);
 router.post('/logout', authenticateToken, userController.logoutUser);
+router.get('/profile', authenticateToken, userController.profileUser);
 
 
 router.get('/users', userController.getAllUsers);
-router.get('/users/:id', userController.getUserById);
 router.put('/users/:id', authenticateToken, validateUser, userController.updateUser);
 router.delete('/users/:id', authenticateToken, userController.deletedUser);
 

@@ -98,6 +98,30 @@ const userController = {
         }
     },
 
+    profileUser: async (req, res) => {
+        try {
+            const user = await Users.findOne({
+                where: {
+                    id_users: req.user.id_users
+                }
+            })
+            if(!user) {
+                return res.status(401).json({message: 'User not found'});
+            }
+            res.status(200).json({
+                message: 'Profile User',
+                user: {
+                    id_users: user.id_users,
+                    username: user.username,
+                    email: user.email,
+                }
+            })
+        } catch (error) {
+            console.error(error.message);
+            
+        }
+    },
+
     getAllUsers: async (req, res) => {
         try {
             const response = await Users.findAll()
@@ -107,23 +131,18 @@ const userController = {
         }
     },
 
-    getUserById: async (req, res) => {
-        try {
-            const response = await Users.findOne({
-                where: {
-                    id_users:req.params.id
-                }
-            })
-            res.status(200).json(response);
-        } catch (error) {
-            console.error(error.message);
-        }
-    },
-
-
     updateUser: async (req, res) => {
         try {
             const { id } = req.params;
+
+            const userId = parseInt(id);
+            if(isNaN(userId)) {
+                return res.status(400).json({message: 'Invalid user ID'});
+            }
+
+            if (req.user.id_users !== userId) {
+                return res.status(403).json({message: 'You are not authorized to update this user'});
+            }
 
             const cekUser = await Users.findByPk(id);
             if (!cekUser) {
@@ -137,7 +156,6 @@ const userController = {
             if (updated === 0) {
                 return res.status(401).json({message: "No changes made"});
             }
-
             res.status(200).json({message: 'User updated successfully'});
         } catch (error) {
             console.error(error.message);
