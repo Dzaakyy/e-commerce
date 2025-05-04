@@ -3,7 +3,7 @@ import Users from '../model/userModel.js';
 
 export const authenticateToken = async (req, res, next) => {
     try {
-        const token = req.header('Authorization')?.replace('Bearer ','');
+        const token = req.cookies.token;
 
         if(!token){
         return res.status(401).json({message: 'Access denied. No token provided.'});
@@ -11,14 +11,14 @@ export const authenticateToken = async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
-        const user = await Users.findByPk(decoded.userId);
+        const user = await Users.findByPk(decoded.id_users);
 
         if (!user) {
             return res.status(404).json({message: 'User not found.'});
         }
 
         req.user = {
-            userId: decoded.userId,
+            id_users: decoded.id_users,
         }
         next();
     } catch (error) {

@@ -11,11 +11,12 @@ import { validateUser, validateProduct, validateCategory, validateCart, validate
 
 // Users
 router.post('/login',validateLogin, userController.loginUser);
+router.post('/register', validateUser, userController.registerUser);
+router.post('/logout', authenticateToken, userController.logoutUser);
 router.get('/users', userController.getAllUsers);
 router.get('/users/:id', userController.getUserById);
-router.post('/users', authenticateToken, validateUser, userController.createUser);
 router.put('/users/:id', authenticateToken, validateUser, userController.updateUser);
-router.delete('/users/:id', authenticateToken, validateUser, userController.deletedUser);
+router.delete('/users/:id', authenticateToken, userController.deletedUser);
 
 // Products
 router.get('/products', productController.getAllProducts);

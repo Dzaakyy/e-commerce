@@ -6,11 +6,22 @@ import apiRoutes from './routes/apiRoutes.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import { requestLogger, errorLogger } from './middleware/loggerMiddleware.js';
+import cookieParser from 'cookie-parser';
 
-app.use(cors());
+app.use(cors(
+    {
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    }
+));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(requestLogger);
+
+app.use(cookieParser());
 
 // Routes
 app.use(apiRoutes);
@@ -19,6 +30,7 @@ app.use(apiRoutes);
 app.get('/', (req, res) => {
     res.send('E-commerce API is running!');
 });
+
 
 app.use(errorLogger);
 app.use((err, res, req, next) => {

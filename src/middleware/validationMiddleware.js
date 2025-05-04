@@ -12,6 +12,8 @@ export const validateLogin = (req, res, next) => {
     next();
 };
 
+
+
 export const validateUser = (req, res, next) => {
     const { username, email, password } = req.body;
     const errors = [];
