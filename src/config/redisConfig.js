@@ -7,6 +7,13 @@ const redisClient = createClient({
   socket: {
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
+    reconnectStrategy: (retries) => {
+      if (retries === 0 ) {
+        console.log('Initial Redis Connection...');
+      }
+      return 2000;
+    },
+    connectTimeout: 10000
   },
 });
 

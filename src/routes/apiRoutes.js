@@ -33,8 +33,9 @@ router.put('/category/:id', authenticateToken, validateCategory, categoryControl
 router.delete('/category/:id', authenticateToken, validateCategory, categoryController.deleteCategory);
 
 // Cart
-router.get('/cart/:userId', cartController.getCart);
+router.get('/cart/:userId',authenticateToken ,cartController.getCart);
 router.post('/cart/add', authenticateToken, validateCart, cartController.addToCart);
+router.put('/cart/:userId/items/:productId', authenticateToken, validateCart, cartController.updateCart);
 router.delete('/cart/:userId/items/:productId', authenticateToken, validateCart, cartController.removeFromCart);
 router.delete('/cart/:userId', authenticateToken, validateCart, cartController.clearCart);
 

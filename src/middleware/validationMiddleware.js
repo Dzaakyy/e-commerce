@@ -67,7 +67,7 @@ export const validateCart = (req, res, next) => {
 
     else if (req.method === 'GET' || req.method === 'DELETE') {
         if (!req.params.userId) errors.push('User ID is required');
-        if (req.method === 'DELETE' && req.url.include('items') && !req.params.productId) {
+        if (req.method === 'DELETE' && req.url.includes('items') && !req.params.productId) {
             errors.push('Product ID is required');  
         } 
     }
