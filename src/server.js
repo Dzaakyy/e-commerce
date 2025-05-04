@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { requestLogger, errorLogger } from './middleware/loggerMiddleware.js';
 import cookieParser from 'cookie-parser';
+import association from './model/association.js';
 
 app.use(cors(
     {
@@ -25,6 +26,8 @@ app.use(cookieParser());
 
 // Routes
 app.use(apiRoutes);
+
+console.log('Model and association loaded successfully!', association);
 
 // Test
 app.get('/', (req, res) => {

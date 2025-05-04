@@ -1,9 +1,18 @@
 import Products from '../model/productModel.js';
+import Category from '../model/categoryModel.js';
 
 const productController = {
     getAllProducts: async (req, res) => {
         try {
-            const response = await Products.findAll();
+            const response = await Products.findAll({
+                include:[ 
+                    {
+                    model: Category,
+                    attributes: ['name'],
+                    as: 'category'
+                }
+            ]
+            });
             res.status(200).json(response);
         } catch (error) {
             console.error(error.message);

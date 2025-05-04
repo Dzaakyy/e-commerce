@@ -25,6 +25,14 @@ const Products = db.define('products', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    category_id:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'category',
+            key: 'id_category'
+        }
+    },
     image: {
         type: DataTypes.STRING,
         allowNull: false,
