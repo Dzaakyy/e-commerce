@@ -1,6 +1,6 @@
 # API E-Commerce
 
-Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan **Redis**. API ini menyimpan data produk dan pengguna di database MySQL, sementara data keranjang belanja disimpan di Redis untuk akses yang cepat dan efisien.
+Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan **Redis**. API ini menyimpan data produk dan pengguna di database MySQL, sementara data keranjang belanja disimpan di Redis untuk akses yang cepat dan efisien yang dimana node.js dan mysql berjalan di system windows dan redis berjalan di system ubuntu.
 
 ## Fitur
 - **Manajemen Produk**: Menyimpan dan mengelola detail produk di MySQL.
@@ -38,4 +38,21 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
 4. **Jalankan aplikasi**:
    ```bash
    npm run dev
+   ```
+
+## Konfigurasi Redi
+  Masuk ke file redis config
+   ```bash
+   sudo nano /etc/redis/redis.conf
+   ```
+
+1. **Ganti IP REDIS**
+   Ganti ip menjadi
+   ```
+   bind 0.0.0.0
+   ```
+
+2. **Ganti Protected Mode**
+   ```bash
+   protected-mode on
    ```
