@@ -30,7 +30,7 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
    npm install
    ```
 3. **Jalankan server Redis**:
-   Pastikan Redis berjalan di sistem:
+   ### Pastikan Redis berjalan di sistem:
    ```bash
    redis-server
    ```
@@ -41,13 +41,13 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
    ```
 
 ## Konfigurasi Redi
-  Masuk ke file redis config
+  ### Masuk ke file redis config
    ```bash
    sudo nano /etc/redis/redis.conf
    ```
 
 1. **Ganti IP REDIS**
-   Ganti ip menjadi
+   ### Ganti ip menjadi
    ```
    bind 0.0.0.0
    ```
