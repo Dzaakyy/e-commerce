@@ -54,5 +54,5 @@ Ini adalah API e-commerce yang dibangun menggunakan **Node.js**, **MySQL**, dan 
 
 2. **Ganti Protected Mode**
    ```bash
-   protected-mode on
+   protected-mode no
    ```
