@@ -8,60 +8,58 @@ const cartController = {
             // const { userId, productId, quantity} = req.body;
 
             const userId = req.user.id_users;
+        const { productId, quantity } = req.body;
 
-            const { productId, quantity } = req.body;
-
-            const cekUser = await Users.findByPk(userId);
-            if (!cekUser) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-
-            const cekProduct = await Products.findByPk(productId);
-            if (!cekProduct) {
-                return res.status(404).json({ message: 'Product not found' });
-            }
-
-            if (cekProduct.stock <= 0) {
-                return res.status(400).json({ message: 'Product out of stock' });
-            }
-
-            if (quantity > 0 && quantity > cekProduct.stock) {
-                return res.status(400).json({
-                    message: 'Quantity exceeds available stock',
-                    maxQuantity: cekProduct.stock
-                });
-            }
-
-            const key = `cart:${userId}`;
-
-            const currentQuantity = await redisClient.hGet(key, productId);
-            const newQuantity = currentQuantity
-                ? parseInt(currentQuantity) + parseInt(quantity)
-                : parseInt(quantity);
-
-            if (newQuantity > cekProduct.stock) {
-                return res.status(400).json({
-                    message: 'Total quantity exceeds available stock',
-                    maxQuantity: cekProduct.stock,
-                    currentQuantity: currentQuantity || 0
-                });
-            }
-
-            await redisClient.hSet(key, productId, newQuantity.toString());
-            res.status(200).json({
-                message: 'Product added to cart successfully',
-                product: {
-                    id_products: productId,
-                    name: cekProduct.name,
-                    quantity: quantity,
-                    stock: cekProduct.stock,
-                    price: cekProduct.price,
-                }
-            });
-        } catch (error) {
-            res.status(500).json({ message: 'Error adding product to cart', error });
+        const cekUser = await Users.findByPk(userId);
+        if (!cekUser) {
+            return res.status(404).json({ message: 'User not found' });
         }
-    },
+
+        const cekProduct = await Products.findByPk(productId);
+        if (!cekProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        if (cekProduct.stock <= 0) {
+            return res.status(400).json({ message: 'Product out of stock' });
+        }
+
+        if (quantity <= 0 || quantity > cekProduct.stock) {
+            return res.status(400).json({
+                message: 'Quantity exceeds available stock',
+                maxQuantity: cekProduct.stock
+            });
+        }
+
+        const key = `cart:${userId}`;
+        let currentQuantity = await redisClient.hGet(key, productId.toString());
+        currentQuantity = currentQuantity ? parseInt(currentQuantity) : 0;
+        const newQuantity = currentQuantity + parseInt(quantity);
+
+        if (newQuantity > cekProduct.stock) {
+            return res.status(400).json({
+                message: 'Total quantity exceeds available stock',
+                maxQuantity: cekProduct.stock,
+                currentQuantity: currentQuantity
+            });
+        }
+
+        await redisClient.hSet(key, productId.toString(), newQuantity.toString());
+        res.status(200).json({
+            message: 'Product added to cart successfully',
+            product: {
+                id_products: productId,
+                name: cekProduct.name,
+                quantity: quantity,
+                stock: cekProduct.stock,
+                price: cekProduct.price,
+            }
+        });
+    } catch (error) {
+        console.error('Error in addToCart:', error);
+        res.status(500).json({ message: 'Error adding product to cart', error: error.message });
+    }
+},
 
     getCart: async (req, res) => {
         try {

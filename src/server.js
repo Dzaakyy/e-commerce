@@ -11,7 +11,7 @@ import association from './model/association.js';
 
 app.use(cors(
     {
-        origin: '*',
+        origin: 'http://10.0.2.2:3000',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
         allowedHeaders: ['Content-Type', 'Authorization'],
