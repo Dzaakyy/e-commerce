@@ -53,11 +53,11 @@ router.get('/category-product/buku', categoryProductController.getBuku);
 
 
 // Cart
-router.get('/cart/:userId',authenticateToken ,cartController.getCart);
+router.get('/get-cart',authenticateToken ,cartController.getCart);
 router.post('/cart/add', authenticateToken, validateCart, cartController.addToCart);
-router.put('/cart/:userId/items/:productId', authenticateToken, validateCart, cartController.updateCart);
-router.delete('/cart/:userId/items/:productId', authenticateToken, validateCart, cartController.removeFromCart);
-router.delete('/cart/:userId', authenticateToken, validateCart, cartController.clearCart);
+router.put('/cart/update/items/:productId', authenticateToken, validateCart, cartController.updateCart);
+router.delete('/cart/delete/items/:productId', authenticateToken, validateCart, cartController.removeFromCart);
+router.delete('/clear-cart', authenticateToken, validateCart, cartController.clearCart);
 
 
 

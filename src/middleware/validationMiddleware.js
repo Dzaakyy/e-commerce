@@ -59,19 +59,15 @@ export const validateCart = (req, res, next) => {
     const errors = [];
     
     if(req.method === 'POST') {
-        const { userId, productId, quantity } = req.body;
-        if (!userId) errors.push('User ID is required');
+        const { productId, quantity } = req.body;
         if (!productId) errors.push('Product ID is required');
         if (!quantity || quantity <= 0) errors.push('Quantity must be greater than 0');
     }
-
-    else if (req.method === 'GET' || req.method === 'DELETE') {
-        if (!req.params.userId) errors.push('User ID is required');
-        if (req.method === 'DELETE' && req.url.includes('items') && !req.params.productId) {
+    else if (req.method === 'DELETE') {
+        if (!req.params.productId) {
             errors.push('Product ID is required');  
         } 
     }
-
 
     if (errors.length > 0) {
         return res.status(400).json({ errors });

@@ -95,7 +95,6 @@ const userController = {
             });
         } catch (error) {
             console.error(error.message);
-            
         }
     },
 
