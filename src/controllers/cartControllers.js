@@ -77,7 +77,7 @@ const cartController = {
                 where: {
                     id_products: productIds
                 },
-                attributes: ['id_products', 'name']
+                attributes: ['id_products', 'name', 'image']
             })
 
             const formattedCart = products.map(product => {
@@ -85,6 +85,7 @@ const cartController = {
                     id_products: product.id_products,
                     name: product.name,
                     quantity: cart[product.id_products],
+                    image: product.image,
                 }
             })
 

@@ -57,7 +57,7 @@ router.get('/get-cart',authenticateToken ,cartController.getCart);
 router.post('/cart/add', authenticateToken, validateCart, cartController.addToCart);
 router.put('/cart/update/items/:productId', authenticateToken, validateCart, cartController.updateCart);
 router.delete('/cart/delete/items/:productId', authenticateToken, validateCart, cartController.removeFromCart);
-router.delete('/clear-cart', authenticateToken, validateCart, cartController.clearCart);
+router.delete('/clear-cart', authenticateToken, cartController.clearCart);
 
 
 
